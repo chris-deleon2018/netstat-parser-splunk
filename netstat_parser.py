@@ -16,7 +16,7 @@ with open("output.txt","r") as input:
   for line in input:
     data.append(line.split())
 
-# Read each line from file
+# Read each element (netstat line entry) from the data list object containing the netstat results
 with open("output.json","w") as json_file:
   for netstat_line in data:
     net_data = dict()
@@ -34,6 +34,7 @@ with open("output.json","w") as json_file:
         addr_port = netstat_line[i].split(":")
         net_data.update({"remote_address": addr_port[0]})
         net_data.update({"remote_port": addr_port[1]})
+      # State
       elif i == 5:
         net_data.update({"state": netstat_line[i]})
       # PID/Program Name
